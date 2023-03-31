@@ -4,7 +4,17 @@ var instruction_text = "<p>Please read these instructions carefully.</p>"+"<p>Th
 
 var instruction_text = "<p>Please read these instructions carefully.</p>"+"<p>This study is being conducted by Jackie Spear in the Department of Psychology. You will be asked to study a list of words, and then tested on your memory performance on these same words. When each word is presented, the word will appear in either <span style=color:green>green</span> or <span style=color:red>red</span>. When the word appears in <span style=color:green>green</span> font, your job will be to <b>type that word</b>. Other times, you will see the word appear in <span style=color:red>RED</span> font, where your job will be to do nothing, and <b>simply read that word silently.</b> Note that the words that you type will not show up on the screen, but will be recorded.</p><p>At test, some of the words will be previously studied words, and some will be new. Your job will be to indicate that either yes, you did previously study a word, or no, you did not. The study is computer mediated and takes approximately 20 minutes to complete. Also, when prompted to provide the answer, respond by typing in the answer to 2+2 = __. You will receive one credit in exchange for your participation. The researcher may be contacted by email at umspear@myumanitoba.ca.</p><p>Press any key to begin.</p>";
 
-var post_practice_text = "<p>Remember! When you see the word appear in <span style=color:green;font-weight:bold>GREEN FONT</span> you must <b>TYPE that word.</b> When you see the word appear in <span style=color:red;font-weight:bold>RED FONT</span>, your job will be to do nothing, and <b>simply READ that word silently.</b></p>"+"<p>Typing is being recorded. Press 'w' to continue.</p>";
+var pre_practice_text = "<p>Before we begin, we can start with a practice round to get you familiar with the task. <br><br>Press 'w' to begin the practice phase</p>";
+
+var post_practice_text = "<p>Remember! When you see the word appear in <span style=color:green;font-weight:bold>GREEN FONT</span> you must <b>TYPE that word.</b> When you see the word appear in <span style=color:red;font-weight:bold>RED FONT</span>, your job will be to do nothing, and <b>simply READ that word silently.</b></p>"+"<p>Typing is being recorded. <br><br> Next, your job will be to indicate whether you previously studied a word by pressing 'y', otherwise press 'n'. Keep your index fingers on these keys. Press 'w' to continue.</p>";
+
+var post_practice_text2 = "<p>Good job! You are ready for the main study! As a reminder, if the word appears in: <br><br><span style=color:green>Green</span> = type that word <br> <span style=color:red>Red</span> = read that word silently <br><br>Please do your best to remember the words without using any aids (e.g. writing them down, taking pictures). <br><br>When you are ready to start the main study, please press 'w' </p>";
+
+
+
+
+
+
 
 
 var attention_check_text = "Provide the answer:";

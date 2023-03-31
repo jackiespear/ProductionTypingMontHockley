@@ -77,65 +77,65 @@ var stimuli_test= [];
 if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   stimuli_test = testlist1;
-  font_buffer_list = frontbufferlist_mixed;
+  front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List1") {
   stimuli = studylist1_pureproduce;
   stimuli_test = testlist1;
-  font_buffer_list = frontbufferlist_pureproduce;
+  front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment == "List1") {
   stimuli = studylist1_pureread;
   stimuli_test = testlist1;
-  font_buffer_list = frontbufferlist_pureread;
+  front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
 
 } else if (condition_assignment == "mixed" && list_assignment =="List2") {
   stimuli = studylist2_mixed;
   stimuli_test = testlist2;
-  font_buffer_list = frontbufferlist_mixed;
+  front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List2") {
   stimuli = studylist2_pureproduce;
   stimuli_test = testlist2;
-  font_buffer_list = frontbufferlist_pureproduce;
+  front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment =="List2") {
   stimuli = studylist2_pureread;
   stimuli_test = testlist2;
-  font_buffer_list = frontbufferlist_pureread;
+  front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
 
 } else if (condition_assignment == "mixed" && list_assignment =="List3") {
   stimuli = studylist3_mixed;
   stimuli_test = testlist3;
-  font_buffer_list = frontbufferlist_mixed;
+  front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List3") {
   stimuli = studylist3_pureproduce;
   stimuli_test = testlist3;
-  font_buffer_list = frontbufferlist_pureproduce;
+  front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment =="List3") {
   stimuli = studylist3_pureread;
   stimuli_test = testlist3;
-  font_buffer_list = frontbufferlist_pureread;
+  front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
 
 } else if (condition_assignment == "mixed" && list_assignment =="List4") {
   stimuli = studylist4_mixed;
   stimuli_test = testlist4;
-  font_buffer_list = frontbufferlist_mixed;
+  front_buffer_list = frontbufferlist_mixed;
   end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List4") {
   stimuli = studylist4_pureproduce;
   stimuli_test = testlist4;
-  font_buffer_list = frontbufferlist_pureproduce;
+  front_buffer_list = frontbufferlist_pureproduce;
   end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment =="List4") {
   stimuli = studylist4_pureread;
   stimuli_test = testlist4;
-  font_buffer_list = frontbufferlist_pureread;
+  front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
 };  
 
@@ -335,6 +335,8 @@ var instructions = {
 
 //Present the instruction to produce or read during PRACTICE phase
 var study_practice = {
+  timeline: [
+    {
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: function(){
@@ -348,7 +350,11 @@ var study_practice = {
     trial_duration: 3000,
     data: {phase:"practice", type: jsPsych.timelineVariable('data')},
     autofocus: 'test-resp-box',
-    timeline_variables: pracstudy,
+    
+  }
+],
+randomize_order: true,
+timeline_variables: pracstudy,
 };
 
 var prac_test_phase = {
@@ -378,12 +384,22 @@ var prac_test_phase = {
 };
 
 //Putting the study words and study instruction together for the PRACTICE phase
- var study_procedure_practice = {
-   timeline: [study_practice, practice_test_instructions, prac_test_phase], //add the practice test phase here as well to be presented after the pratice phase
+/*  var study_procedure_practice = {
+   timeline: [study_practice], //add the practice test phase here as well to be presented after the pratice phase
+   timeline_variables: pracstudy,
    randomize_order: true,
- };
+ }; */
 
-//test phase instructions presented after study PRACTICE phase is over
+// pre PRACTICE phase instructions
+var practice_test_instructions_pre = {
+  type: "html-keyboard-response",
+  stimulus: pre_practice_text,
+  choices: ['w'],
+  data: {"phase": "Practice_Test_Instructions",
+},
+};
+
+//test phase instructions presented before test PRACTICE phase 
 var practice_test_instructions = {
   type: "html-keyboard-response",
   stimulus: post_practice_text,
@@ -392,9 +408,22 @@ var practice_test_instructions = {
 },
 };
 
+//test phase instructions presented after entire PRACTICE phase is over
+var practice_test_instructions_post = {
+  type: "html-keyboard-response",
+  stimulus: post_practice_text2,
+  choices: ['w'],
+  data: {"phase": "Practice_Test_Instructions",
+},
+};
+
+
+
 
 //Study Phase - Front Buffer Items
-var study_font_buffer = {
+var study_front_buffer = {
+  timeline:[
+    {
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: function(){
@@ -408,12 +437,17 @@ var study_font_buffer = {
     trial_duration: 3000, //change back to 3000
     data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
-    timeline_variables: font_buffer_list,
-    //randomize_order:true,
+
+  }
+],
+    timeline_variables: front_buffer_list,
+    randomize_order:true,
 };
 
 //Study Phase
 var study_instructions123 = {
+  timeline: [
+    {
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: function(){
@@ -427,12 +461,16 @@ var study_instructions123 = {
     trial_duration: 3000, //change back to 3000
     data: {phase:"study", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
-    timeline_variables: stimuli,
-    //randomize_order:true,
+  }
+],
+timeline_variables: stimuli,
+randomize_order:true,
 };
 
 //Study Phase - End Buffer Items
 var study_end_buffer = {
+  timeline:[
+    {
     type: 'survey-html-form',
     button_label: 'Press enter to continue',
     preamble: function(){
@@ -446,14 +484,17 @@ var study_end_buffer = {
     trial_duration: 3000, //change back to 3000
     data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
+
+  }
+],
     timeline_variables: end_buffer_list,
-    //randomize_order:true,
+    randomize_order:true,
 };
 
 //Putting the study words and study instruction together
  var study_procedure = {
-   timeline: [study_font_buffer, study_instructions123, study_end_buffer], // modifiy this to add the buffer items at the beginning and at the end
-   //timeline_variables: stimuli,
+   timeline: [study_instructions123], // modifiy this to add the buffer items at the beginning and at the end
+   timeline_variables: stimuli,
    randomize_order: true,
  };
 
@@ -614,14 +655,20 @@ var no_consent = {
 
 /*set up experiment structure*/
 var timeline = [];
-timeline.push(consent);
-timeline.push(no_consent);
-timeline.push(welcome);
-timeline.push(enter_full_screen);
+//timeline.push(consent);
+//timeline.push(no_consent);
+//timeline.push(welcome);
+//timeline.push(enter_full_screen);
 timeline.push(instructions);
-timeline.push(study_procedure_practice);
+timeline.push(practice_test_instructions_pre);
+//timeline.push(study_procedure_practice);
+timeline.push(study_practice);
 timeline.push(practice_test_instructions);
-timeline.push(study_procedure); 
+timeline.push(prac_test_phase);
+timeline.push(practice_test_instructions_post);
+timeline.push(study_front_buffer);
+timeline.push(study_instructions123); 
+timeline.push(study_end_buffer);
 timeline.push(test_instructions);
 timeline.push(test_phase);
 timeline.push(survey);
