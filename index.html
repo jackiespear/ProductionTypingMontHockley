@@ -383,13 +383,6 @@ var prac_test_phase = {
     timeline_variables: practest,
 };
 
-//Putting the study words and study instruction together for the PRACTICE phase
-/*  var study_procedure_practice = {
-   timeline: [study_practice], //add the practice test phase here as well to be presented after the pratice phase
-   timeline_variables: pracstudy,
-   randomize_order: true,
- }; */
-
 // pre PRACTICE phase instructions
 var practice_test_instructions_pre = {
   type: "html-keyboard-response",
@@ -416,8 +409,6 @@ var practice_test_instructions_post = {
   data: {"phase": "Practice_Test_Instructions",
 },
 };
-
-
 
 
 //Study Phase - Front Buffer Items
@@ -655,13 +646,12 @@ var no_consent = {
 
 /*set up experiment structure*/
 var timeline = [];
-//timeline.push(consent);
-//timeline.push(no_consent);
-//timeline.push(welcome);
-//timeline.push(enter_full_screen);
+timeline.push(consent);
+timeline.push(no_consent);
+timeline.push(welcome);
+timeline.push(enter_full_screen);
 timeline.push(instructions);
 timeline.push(practice_test_instructions_pre);
-//timeline.push(study_procedure_practice);
 timeline.push(study_practice);
 timeline.push(practice_test_instructions);
 timeline.push(prac_test_phase);
