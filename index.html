@@ -77,42 +77,66 @@ var stimuli_test= [];
 if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
   stimuli_test = testlist1;
+  font_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List1") {
   stimuli = studylist1_pureproduce;
   stimuli_test = testlist1;
+  font_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment == "List1") {
   stimuli = studylist1_pureread;
   stimuli_test = testlist1;
+  font_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
 
 } else if (condition_assignment == "mixed" && list_assignment =="List2") {
   stimuli = studylist2_mixed;
   stimuli_test = testlist2;
+  font_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List2") {
   stimuli = studylist2_pureproduce;
   stimuli_test = testlist2;
+  font_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment =="List2") {
   stimuli = studylist2_pureread;
   stimuli_test = testlist2;
+  font_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
 
 } else if (condition_assignment == "mixed" && list_assignment =="List3") {
   stimuli = studylist3_mixed;
   stimuli_test = testlist3;
+  font_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List3") {
   stimuli = studylist3_pureproduce;
   stimuli_test = testlist3;
+  font_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment =="List3") {
   stimuli = studylist3_pureread;
   stimuli_test = testlist3;
+  font_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
 
 } else if (condition_assignment == "mixed" && list_assignment =="List4") {
   stimuli = studylist4_mixed;
   stimuli_test = testlist4;
+  font_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
 } else if (condition_assignment == "pureproduce" && list_assignment =="List4") {
   stimuli = studylist4_pureproduce;
   stimuli_test = testlist4;
+  font_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
 } else if (condition_assignment == "pureread" && list_assignment =="List4") {
   stimuli = studylist4_pureread;
   stimuli_test = testlist4;
+  font_buffer_list = frontbufferlist_pureread;
+  end_buffer_list = endbufferlist_pureread;
 };  
 
 console.table(stimuli);
@@ -150,14 +174,14 @@ console.table(stimuli);
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBcgX9bBgq93_hGkBoxo6PnliUhiazh0DQ",
-  authDomain: "productiontypingsemanticphono.firebaseapp.com",
-  databaseURL: "https://productiontypingsemanticphono-default-rtdb.firebaseio.com",
-  projectId: "productiontypingsemanticphono",
-  storageBucket: "productiontypingsemanticphono.appspot.com",
-  messagingSenderId: "886840660468",
-  appId: "1:886840660468:web:40b758e13dafd92f3ee9a1",
-  measurementId: "G-K7G9WL0F5B"
+  apiKey: "AIzaSyBZnlTmgdyuRNzXzP6wkPvupdP6L4QeXdA",
+  authDomain: "productiontypingmonthockley.firebaseapp.com",
+  databaseURL: "https://productiontypingmonthockley-default-rtdb.firebaseio.com",
+  projectId: "productiontypingmonthockley",
+  storageBucket: "productiontypingmonthockley.appspot.com",
+  messagingSenderId: "431479655926",
+  appId: "1:431479655926:web:1395d2a2fb4f956b534bd7",
+  measurementId: "G-PPVY13M9V1"
 };
 
 // Initialize Firebase
@@ -324,13 +348,38 @@ var study_practice = {
     trial_duration: 3000,
     data: {phase:"practice", type: jsPsych.timelineVariable('data')},
     autofocus: 'test-resp-box',
+    timeline_variables: pracstudy,
+};
 
+var prac_test_phase = {
+    timeline: [
+        {
+            type: 'html-keyboard-response',
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            choices: ['y', 'n'],
+            data: {data: jsPsych.timelineVariable("data"), phase: "test"},
+            response_ends_trial:true,
+            timeline_variables: stimuli_test,
+            post_trial_gap: 500, // like a blank 500
+             on_finish: function(data) {
+              if (data.response == "y" && data.data.type == "old") {
+                data.correct = 1;
+              } else if (data.response == "n" && data.data.type == "new") {
+                data.correct = 1;
+              }
+              else {
+                data.correct = 0;
+              }
+            } 
+        }
+    ],
+    randomize_order: true,
+    timeline_variables: practest,
 };
 
 //Putting the study words and study instruction together for the PRACTICE phase
  var study_procedure_practice = {
-   timeline: [study_practice],
-   timeline_variables: pracstudy,
+   timeline: [study_practice, practice_test_instructions, prac_test_phase], //add the practice test phase here as well to be presented after the pratice phase
    randomize_order: true,
  };
 
@@ -343,6 +392,25 @@ var practice_test_instructions = {
 },
 };
 
+
+//Study Phase - Front Buffer Items
+var study_font_buffer = {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: function(){
+        var html = `
+          <p style='font-size: 48px;'>${jsPsych.timelineVariable('stimulus')}</p>
+          `
+        return html;
+    },
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 500, 
+    trial_duration: 3000, //change back to 3000
+    data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
+    autofocus: 'test-resp-box',
+    timeline_variables: font_buffer_list,
+    //randomize_order:true,
+};
 
 //Study Phase
 var study_instructions123 = {
@@ -359,14 +427,33 @@ var study_instructions123 = {
     trial_duration: 3000, //change back to 3000
     data: {phase:"study", data: jsPsych.timelineVariable("data")},
     autofocus: 'test-resp-box',
-    //timeline_variables: study_instructions,
+    timeline_variables: stimuli,
+    //randomize_order:true,
+};
+
+//Study Phase - End Buffer Items
+var study_end_buffer = {
+    type: 'survey-html-form',
+    button_label: 'Press enter to continue',
+    preamble: function(){
+        var html = `
+          <p style='font-size: 48px;'>${jsPsych.timelineVariable('stimulus')}</p>
+          `
+        return html;
+    },
+    html:  '<p> <input type="text" onkeydown="return (event.keycode!=13);" id="test-resp-box" name="response" size="10" style=color:white;/></p>', //color being white will not mirror typed word to the screen
+    post_trial_gap: 500, 
+    trial_duration: 3000, //change back to 3000
+    data: {phase:"study_buffer", data: jsPsych.timelineVariable("data")},
+    autofocus: 'test-resp-box',
+    timeline_variables: end_buffer_list,
     //randomize_order:true,
 };
 
 //Putting the study words and study instruction together
  var study_procedure = {
-   timeline: [study_instructions123],
-   timeline_variables: stimuli,
+   timeline: [study_font_buffer, study_instructions123, study_end_buffer], // modifiy this to add the buffer items at the beginning and at the end
+   //timeline_variables: stimuli,
    randomize_order: true,
  };
 
