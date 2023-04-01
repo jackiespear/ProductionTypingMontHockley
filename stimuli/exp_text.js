@@ -8,7 +8,7 @@ var pre_practice_text = "<p>Before we begin, we can start with a practice round 
 
 var post_practice_text = "<p>Remember! When you see the word appear in <span style=color:green;font-weight:bold>GREEN FONT</span> you must <b>TYPE that word.</b> When you see the word appear in <span style=color:red;font-weight:bold>RED FONT</span>, your job will be to do nothing, and <b>simply READ that word silently.</b></p>"+"<p>Typing is being recorded. <br><br> Next, your job will be to indicate whether you previously studied a word by pressing 'y', otherwise press 'n'. Keep your index fingers on these keys. Press 'w' to continue.</p>";
 
-var post_practice_text2 = "<p>Good job! You are ready for the main study! As a reminder, if the word appears in: <br><br><span style=color:green>Green</span> = type that word <br> <span style=color:red>Red</span> = read that word silently <br><br>Please do your best to remember the words without using any aids (e.g. writing them down, taking pictures). <br><br>When you are ready to start the main study, please press 'w' </p>";
+var post_practice_text2 = "<p>Good job! You are ready for the main study! As a reminder, if the word appears in: <br><br><span style=color:green>Green</span> = type that word <br> <span style=color:red>Red</span> = read that word silently <br><br>Please note that depending on the condition you are assigned to, you may be asked to type all of the words or none of the words. Also,please do your best to remember the words without using any aids (e.g. writing them down, taking pictures). <br><br>When you are ready to start the main study, please press 'w' </p>";
 
 
 
