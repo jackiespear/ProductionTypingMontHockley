@@ -48,7 +48,7 @@
 //                       Randomly Assign one of the between-subjects counterbalanced lists              //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['mixed', 'pureproduce', 'pureread'], 1)[0];
+var condition_assignment = jsPsych.randomization.sampleWithoutReplacement(['mixed', 'pureproduce'], 1)[0];
 jsPsych.data.addProperties({
   condition: condition_assignment
 });
@@ -65,6 +65,54 @@ console.log(condition_assignment);
 
 // create a variable to hold the trial information, which changes based on condition
 var stimuli = [];
+var stimuli_test= [];
+if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1 is sampled from above randomization routine, the stimuli presented will be...
+  stimuli = studylist1_mixed;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List1") {
+  stimuli = studylist1_pureproduce;
+  stimuli_test = testlist1;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List2") {
+  stimuli = studylist2_mixed;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List2") {
+  stimuli = studylist2_pureproduce;
+  stimuli_test = testlist2;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List3") {
+  stimuli = studylist3_mixed;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List3") {
+  stimuli = studylist3_pureproduce;
+  stimuli_test = testlist3;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+
+} else if (condition_assignment == "mixed" && list_assignment =="List4") {
+  stimuli = studylist4_mixed;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_mixed;
+  end_buffer_list = endbufferlist_mixed;
+} else if (condition_assignment == "pureproduce" && list_assignment =="List4") {
+  stimuli = studylist4_pureproduce;
+  stimuli_test = testlist4;
+  front_buffer_list = frontbufferlist_pureproduce;
+  end_buffer_list = endbufferlist_pureproduce;
+};  
+
+//original randomization procedure
+/* var stimuli = [];
 var stimuli_test= [];
 if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1 is sampled from above randomization routine, the stimuli presented will be...
   stimuli = studylist1_mixed;
@@ -129,7 +177,7 @@ if (condition_assignment == "mixed" && list_assignment == "List1" ) { //if List1
   stimuli_test = testlist4;
   front_buffer_list = frontbufferlist_pureread;
   end_buffer_list = endbufferlist_pureread;
-};  
+};   */
 
 //console.table(stimuli);
 //console.log(stimuli);
